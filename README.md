@@ -21,14 +21,14 @@ Every codelab is the **same trip-planner app** ("Plan 3 days in Tokyo"), so the 
 
 The parts build on each other:
 
-| # | Part | Role | Static | Declarative | Open-ended | Mixed | Video |
-|---|---|---|---|---|---|---|---|
-| 01 | [AG-UI](01-ag-ui/) | The **pipe**: agent → page events | ✅ | ✅ | ✅ | ✅ | _TBD_ |
-| 02 | [A2UI](02-a2ui/) | A UI **format** sent through the pipe | ✅ | ✅ | ✅ | ✅ | _TBD_ |
-| 03 | [OpenUI](03-openui/) | A compact UI **language** | ✅ | ✅ | ✅ | ✅ | _TBD_ |
-| 04 | [json-render](04-json-render/) | One spec, several **renderers** | ✅ | ✅ | ✅ | ✅ | _TBD_ |
-| 05 | [MCP Apps](05-mcp-apps/) | The UI hosted inside **another app** | ✅ | ✅ | ✅ | ✅ | _TBD_ |
-| 06 | [Harness integration](06-harness-integration/) | All of it in a real **agent loop** | ✅ | ✅ | ✅ | ✅ | _TBD_ |
+| # | Part | Role | Static | Declarative | Open-ended | Mixed |
+|---|---|---|---|---|---|---|
+| 01 | [AG-UI](01-ag-ui/) | The **pipe**: agent → page events | ✅ | ✅ | ✅ | ✅ |
+| 02 | [A2UI](02-a2ui/) | A UI **format** sent through the pipe | ✅ | ✅ | ✅ | ✅ |
+| 03 | [OpenUI](03-openui/) | A compact UI **language** | ✅ | ✅ | ✅ | ✅ |
+| 04 | [json-render](04-json-render/) | One spec, several **renderers** | ✅ | ✅ | ✅ | ✅ |
+| 05 | [MCP Apps](05-mcp-apps/) | The UI hosted inside **another app** | ✅ | ✅ | ✅ | ✅ |
+| 06 | [Harness integration](06-harness-integration/) | All of it in a real **agent loop** | ✅ | ✅ | ✅ | ✅ |
 
 Each part folder has a `README.md`: what the technology is, a walkthrough of each mode's code, screenshots, and check-your-understanding questions.
 
@@ -61,7 +61,7 @@ shared/                   written once, used by every part
      app.js, index.html   the page
      offline_*            saved model replies, used when there is no API key
      test_demo.py         offline tests
-     screenshot*.png      recorded output
+     screenshot*.png      example output
 ```
 
 ## Setup (once)
@@ -93,10 +93,4 @@ python shared/check_all.py             # every test + every demo in a headless b
 python 06-harness-integration/harness.py --mode declarative "Summarize my trip spending"   # the agent in the terminal
 ```
 
-Tips: `PORT=8001 python …` runs a second demo at the same time. `OFFLINE=1` forces offline mode even with a key. `OFFLINE_STREAM_DELAY=0.05` makes offline replies stream slowly, so you can watch progressive rendering.
-
-## Recording the videos
-
-1. `python shared/check_all.py` confirms every demo still runs.
-2. Record each part, one server at a time, following that part's README.
-3. Every finished part is tagged (`git tag`). `git checkout part-03-openui` brings back exactly that version; `git checkout main` returns.
+Tips: `PORT=8001 python …` runs a second demo at the same time. `OFFLINE=1` forces offline mode even with a key. `OFFLINE_STREAM_DELAY=0.05` makes offline replies stream slowly, so you can watch progressive rendering. Every finished part is tagged (`git tag`): `git checkout part-03-openui` brings back that version, `git checkout main` returns.

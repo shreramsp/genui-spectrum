@@ -77,7 +77,7 @@ python 03-openui/2-declarative/server.py     # then open http://localhost:8000
 pytest 03-openui                             # 12 offline tests (needs Node, for the parser)
 ```
 
-To watch offline streaming slowly (useful for recording): `OFFLINE_STREAM_DELAY=0.05 python 03-openui/2-declarative/server.py`.
+To watch offline streaming slowly (useful for demos): `OFFLINE_STREAM_DELAY=0.05 python 03-openui/2-declarative/server.py`.
 
 **Rebuilding the JavaScript** (only if you change `web/*.mjs`): `cd 03-openui/web && npm install && npm run build`. The built files in `web/dist/` and `web/prompt*.txt` are committed, so the demos run without npm.
 
