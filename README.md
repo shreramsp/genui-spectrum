@@ -71,4 +71,11 @@ Get a key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey). T
 python 01-ag-ui/1-static/server.py     # open http://localhost:8000
 pytest                                 # all offline tests
 python shared/screenshot.py 01-ag-ui/1-static   # headless-browser check + screenshot
+python shared/check_all.py             # check EVERY demo still works (run before recording)
 ```
+
+## Recording all the videos at the end
+
+1. `python shared/check_all.py`: confirms every demo, old and new, still runs.
+2. Record each part from its `VIDEO_SCRIPT.md`, one server at a time (all use port 8000; use `PORT=8001 python ...` to run two at once).
+3. If something ever breaks, every finished part is tagged (`git tag` lists them). `git checkout part-01-ag-ui` brings back exactly the version that worked; `git checkout main` returns.

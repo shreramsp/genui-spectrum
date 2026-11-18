@@ -88,7 +88,7 @@ def main():
     if "RUN_ERROR" in log:
         sys.exit("run ended with RUN_ERROR:\n" + log)
     for shot in shots:
-        print("saved", shot.relative_to(ROOT))
+        print("saved", shot.relative_to(ROOT) if shot.is_relative_to(ROOT) else shot)
 
 
 if __name__ == "__main__":
