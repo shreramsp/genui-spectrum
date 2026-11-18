@@ -26,12 +26,14 @@ def free_port():
         return s.getsockname()[1]
 
 
-def wait_for_run(page, timeout=90_000):
+def wait_for_run(page, timeout=90_000, pattern="RUN_(FINISHED|ERROR)"):
+    """Wait until the event log shows `pattern` (a finished AG-UI run by default)."""
     page.wait_for_function(
-        "() => [...document.querySelectorAll('.ev-type')].some(e => /RUN_(FINISHED|ERROR)/.test(e.textContent))",
+        "(p) => [...document.querySelectorAll('.ev')].some(e => new RegExp(p).test(e.textContent))",
+        arg=pattern,
         timeout=timeout,
     )
-    page.wait_for_timeout(600)  # let iframes paint
+    page.wait_for_timeout(800)  # let iframes paint
 
 
 def main():
@@ -39,6 +41,8 @@ def main():
     parser.add_argument("demo")
     parser.add_argument("--click", action="append", default=[], help="button text to click after the first run")
     parser.add_argument("--frame-click", action="append", default=[], help="button text to click inside the sandbox")
+    parser.add_argument("--view-click", action="append", default=[], help="MCP Apps: button text inside the host's view iframe")
+    parser.add_argument("--view-frame-click", action="append", default=[], help="MCP Apps: button text inside the view's nested sandbox")
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--out", default="screenshot.png")
     args = parser.parse_args()
@@ -68,13 +72,21 @@ def main():
             shots = [demo / args.out]
             page.screenshot(path=shots[0], full_page=True)
 
-            for i, label in enumerate(args.frame_click + args.click, start=1):
+            view = page.frame_locator(".mcp-host-frame iframe")
+            steps = [("frame", x) for x in args.frame_click] + [("page", x) for x in args.click]
+            steps += [("nested", x) for x in args.view_frame_click] + [("view", x) for x in args.view_click]
+            for i, (where, label) in enumerate(steps, start=1):
                 page.evaluate("document.querySelector('.shell-events').replaceChildren()")
-                if label in args.frame_click:
+                if where == "frame":
                     page.frame_locator("iframe.sandbox").get_by_text(label).click()
-                else:
+                elif where == "page":
                     page.get_by_role("button", name=label).click()
-                wait_for_run(page)
+                elif where == "view":
+                    view.get_by_role("button", name=label).click()
+                else:
+                    view.frame_locator("iframe.sandbox").get_by_text(label).click()
+                # MCP view clicks call tools through the host (no AG-UI run): wait for the bridge reply.
+                wait_for_run(page, pattern="RUN_(FINISHED|ERROR)" if where in ("frame", "page") else "response #\\d+")
                 shot = demo / args.out.replace(".png", f"_after_{i}.png")
                 page.screenshot(path=shot, full_page=True)
                 shots.append(shot)

@@ -116,6 +116,7 @@ export function createShell({ part, mode, title, blurb, examples = [], onSubmit 
 function hint(e) {
   if (e.delta && typeof e.delta === "string") return JSON.stringify(e.delta.slice(0, 40));
   if (e.toolCallName) return e.toolCallName;
+  if (e.jsonrpc) return e.method ?? `response #${e.id}${e.error ? " (error)" : ""}`;
   if (e.name === "jsonrender" && e.value?.line) {
     try {
       const p = JSON.parse(e.value.line);

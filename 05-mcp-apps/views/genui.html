@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Trip screen</title>
+<style>
+/*SHARED_STYLE*/
+body { padding: 12px; }
+</style>
+</head>
+<body>
+<!-- One generic view for three modes. It renders whatever the tool result carries:
+       {spec}                         -> the catalog renderer                      (declarative)
+       {html}                         -> a NESTED sandboxed iframe                 (open-ended)
+       {spec + screenId} w/ HtmlFrame -> both; clicks call update_trip_screen      (mixed)
+     The shared renderer and sandbox code are pasted in by trip_server.build_view(). -->
+<div id="status" class="shell-empty">Waiting for the host…</div>
+<div id="root"></div>
+<script type="module">
+/*SHARED_RENDERER*/
+/*VIEW_BRIDGE*/
+const root = document.getElementById("root");
+const status = document.getElementById("status");
+
+function show(result) {
+  if (result.isError) {
+    status.hidden = false;
+    status.textContent = result.content?.[0]?.text ?? "error";
+    return;
+  }
+  const d = result.structuredContent ?? {};
+  status.hidden = true;
+  if (d.html) {
+    const box = document.createElement("div");
+    box.className = "c-htmlframe";
+    const tag = document.createElement("div");
+    tag.className = "c-htmlframe-tag";
+    tag.textContent = "AI-generated HTML · nested sandbox";
+    box.appendChild(tag);
+    root.replaceChildren(box);
+    mountSandbox(box, d.html, { height: 440 });
+  } else if (d.spec) {
+    renderSpec(d.spec, root, {
+      onAction: async (name, payload) => {
+        if (!d.screenId) {
+          status.hidden = false;
+          status.textContent = `"${name}" clicked: actions are wired up in mixed mode.`;
+          return;
+        }
+        status.hidden = false;
+        status.textContent = `Calling update_trip_screen("${name}") through the host…`;
+        try {
+          show(await mcpApp.request("tools/call", { name: "update_trip_screen", arguments: { screen_id: d.screenId, action: name, payload } }));
+        } catch (err) {
+          status.textContent = `Refused: ${err.message}`;
+        }
+      },
+    });
+  }
+}
+mcpApp.onResult(show);
+</script>
+</body>
+</html>

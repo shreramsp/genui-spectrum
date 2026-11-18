@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Trip card</title>
+<style>
+/*SHARED_STYLE*/
+body { padding: 12px; }
+.day { background: var(--soft); border-radius: 8px; padding: 8px 12px; }
+.day b { display: block; }
+</style>
+</head>
+<body>
+<!-- STATIC MODE: this whole view is hand-written. Only the DATA comes from the tool result. -->
+<div id="status" class="shell-empty">Waiting for the host…</div>
+<section id="card" class="c-card" hidden>
+  <h3 id="title"></h3>
+  <div class="c-row">
+    <div class="c-metric"><div class="c-metric-label">Days</div><div class="c-metric-value" id="ndays"></div></div>
+    <div class="c-metric"><div class="c-metric-label">Estimated budget</div><div class="c-metric-value" id="total"></div></div>
+  </div>
+  <div id="days" style="display:flex;flex-direction:column;gap:8px"></div>
+  <figure class="c-chart"><figcaption>Budget by category (USD)</figcaption><div id="bars"></div></figure>
+  <p id="tip" class="c-metric-hint"></p>
+  <button class="c-button" id="ask">Ask the chat for a cheaper version</button>
+</section>
+<script type="module">
+/*VIEW_BRIDGE*/
+const $ = (id) => document.getElementById(id);
+const make = (tag, cls, text) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = String(text);
+  return n;
+};
+let latest = null;
+
+mcpApp.onResult((result) => {
+  const d = result.structuredContent;
+  if (!d) {
+    $("status").textContent = result.content?.[0]?.text ?? "no data";
+    return;
+  }
+  latest = d;
+  $("status").hidden = true;
+  $("card").hidden = false;
+  $("title").textContent = d.title;
+  $("ndays").textContent = d.days.length;
+  $("total").textContent = `$${Math.round(d.total)}`;
+  $("days").replaceChildren(...d.days.map((day, i) => {
+    const box = make("div", "day");
+    box.append(make("b", null, `Day ${i + 1} · ${day.title}`), make("span", null, day.plan));
+    return box;
+  }));
+  const max = Math.max(1, ...d.budget.map((b) => b.amount));
+  $("bars").replaceChildren(...d.budget.map((b) => {
+    const row = make("div", "c-bar-row");
+    const track = make("div", "c-bar-track");
+    const bar = make("div", "c-bar");
+    bar.style.width = `${(b.amount / max) * 100}%`;
+    track.appendChild(bar);
+    row.append(make("span", "c-bar-label", b.category), track, make("span", "c-bar-value", b.amount));
+    return row;
+  }));
+  $("tip").textContent = d.tip || "";
+});
+
+// ui/message: the view speaks into the host's chat. The host decides what to do with it.
+$("ask").onclick = () =>
+  mcpApp.request("ui/message", { role: "user", content: { type: "text", text: `Make "${latest.title}" cheaper (now about $${Math.round(latest.total)}).` } });
+</script>
+</body>
+</html>
