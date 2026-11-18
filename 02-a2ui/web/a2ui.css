@@ -1,0 +1,25 @@
+/* Styles for the A2UI Basic Catalog renderer (02-a2ui/web/a2ui.js). */
+.a2-column, .a2-list { display: flex; flex-direction: column; gap: 10px; }
+.a2-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.a2-row > * { flex: 1 1 140px; }
+.a2-justify-spaceBetween { justify-content: space-between; }
+.a2-justify-center { justify-content: center; }
+.a2-justify-end { justify-content: flex-end; }
+.a2-row.a2-align-center { align-items: center; }
+.a2-row.a2-justify-spaceBetween > * { flex: 0 1 auto; }
+.a2-text { margin: 0; }
+h2.a2-text, h3.a2-text, h4.a2-text, h5.a2-text { margin: 0; }
+h5.a2-text { font-size: 15px; }
+small.a2-text { color: var(--muted); }
+.a2-list > .a2-column, .a2-list > .a2-row { background: var(--soft); border-radius: 8px; padding: 8px 12px; gap: 2px; }
+.a2-divider { border: 0; border-top: 1px solid var(--line); width: 100%; margin: 4px 0; }
+.a2-icon { font-size: 20px; flex: 0 0 auto !important; }
+.a2-field { display: flex; flex-direction: column; gap: 4px; }
+.a2-field input:not([type]) { padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--ink); font: inherit; }
+.a2-field input[type="range"] { accent-color: var(--accent); }
+.a2-label { font-size: 13px; color: var(--muted); font-weight: 600; }
+.a2-check { display: flex; gap: 6px; align-items: center; }
+.a2-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip.a2-on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.a2-btn-borderless { background: transparent; color: var(--accent); }
+.a2-media { color: var(--muted); font-size: 13px; border: 1px dashed var(--line); border-radius: 8px; padding: 12px; }

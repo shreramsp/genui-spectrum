@@ -110,11 +110,16 @@ def stream_run(run_input: RunAgentInput, body):
     return StreamingResponse(events(), media_type=encoder.get_content_type())
 
 
-def create_app(demo_dir):
-    """A FastAPI app: the demo's index.html at /, its app.js at /app.js, shared assets at /shared."""
+def create_app(demo_dir, mounts=None):
+    """A FastAPI app: the demo's index.html at /, its app.js at /app.js, shared assets at /shared.
+
+    `mounts` adds more static folders, e.g. {"/part": part_dir / "web"} for code shared by one part.
+    """
     demo_dir = Path(demo_dir)
     app = FastAPI()
     app.mount("/shared", StaticFiles(directory=SHARED_WEB), name="shared")
+    for url, folder in (mounts or {}).items():
+        app.mount(url, StaticFiles(directory=folder), name=url.strip("/"))
 
     @app.get("/")
     def index():

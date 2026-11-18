@@ -1,0 +1,133 @@
+{
+ "components": [
+  {
+   "id": "root",
+   "component": "Card",
+   "child": "main"
+  },
+  {
+   "id": "main",
+   "component": "Column",
+   "children": [
+    "title",
+    "stats",
+    "days",
+    "pace",
+    "cheaper"
+   ]
+  },
+  {
+   "id": "title",
+   "component": "Text",
+   "variant": "h2",
+   "text": {
+    "path": "/title"
+   }
+  },
+  {
+   "id": "stats",
+   "component": "Row",
+   "children": [
+    "budget",
+    "pace_now"
+   ]
+  },
+  {
+   "id": "budget",
+   "component": "Text",
+   "variant": "h4",
+   "text": {
+    "path": "/budget"
+   }
+  },
+  {
+   "id": "pace_now",
+   "component": "Text",
+   "variant": "h4",
+   "text": {
+    "path": "/pace"
+   }
+  },
+  {
+   "id": "days",
+   "component": "List",
+   "children": {
+    "componentId": "day",
+    "path": "/days"
+   }
+  },
+  {
+   "id": "day",
+   "component": "Column",
+   "children": [
+    "day_name",
+    "day_plan"
+   ]
+  },
+  {
+   "id": "day_name",
+   "component": "Text",
+   "variant": "h5",
+   "text": {
+    "path": "name"
+   }
+  },
+  {
+   "id": "day_plan",
+   "component": "Text",
+   "variant": "caption",
+   "text": {
+    "path": "plan"
+   }
+  },
+  {
+   "id": "pace",
+   "component": "HtmlFrame",
+   "html": "<style>\nbody{font-family:system-ui,sans-serif;margin:0;padding:12px;color:#1b1f24}\n.lbl{display:flex;justify-content:space-between;font-size:13px;color:#667085}\ninput[type=range]{width:100%;accent-color:#c2378c}\n.day{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}\n.slot{flex:1 1 90px;background:#fdf0f7;border-radius:8px;padding:8px;font-size:13px;text-align:center}\nbutton{margin-top:6px;background:#c2378c;color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer}\n</style>\n<b>How packed should each day be?</b>\n<input id=\"pace\" type=\"range\" min=\"1\" max=\"3\" value=\"2\">\n<div class=\"lbl\"><span>Relaxed</span><span>Balanced</span><span>Packed</span></div>\n<div class=\"day\" id=\"preview\"></div>\n<button id=\"apply\">Apply this pace</button>\n<script>\nconst names={1:\"relaxed\",2:\"balanced\",3:\"packed\"};\nconst slots={1:[\"Late breakfast\",\"1 sight\",\"Long dinner\"],2:[\"Breakfast\",\"2 sights\",\"Café break\",\"Dinner\"],3:[\"Early start\",\"3 sights\",\"Quick lunch\",\"Market\",\"Night views\"]};\nfunction draw(){preview.innerHTML=slots[pace.value].map(s=>`<div class=\"slot\">${s}</div>`).join(\"\");}\npace.oninput=draw; draw();\napply.onclick=()=>sendAction(\"set_pace\",{pace:names[pace.value]});\n</script>",
+   "height": 230,
+   "actions": [
+    "set_pace"
+   ]
+  },
+  {
+   "id": "cheaper",
+   "component": "Button",
+   "variant": "primary",
+   "child": "cheaper_label",
+   "action": {
+    "event": {
+     "name": "cheaper",
+     "context": {
+      "budget": {
+       "path": "/budget"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "cheaper_label",
+   "component": "Text",
+   "text": "Make it cheaper"
+  }
+ ],
+ "data": {
+  "title": "3 days in Tokyo",
+  "budget": "Budget ≈ $735",
+  "pace": "Pace: balanced",
+  "days": [
+   {
+    "name": "Day 1 · Old Tokyo",
+    "plan": "Senso-ji · Sumida river · Ueno izakaya"
+   },
+   {
+    "name": "Day 2 · Modern Tokyo",
+    "plan": "Meiji Shrine · Shibuya · Shinjuku views"
+   },
+   {
+    "name": "Day 3 · Food & markets",
+    "plan": "Tsukiji outer market · Akihabara · Ikebukuro ramen"
+   }
+  ]
+ }
+}

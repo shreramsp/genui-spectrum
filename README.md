@@ -24,7 +24,7 @@ The parts build on each other:
 | # | Part | Role | Static | Declarative | Open-ended | Mixed | Video |
 |---|---|---|---|---|---|---|---|
 | 01 | [AG-UI](01-ag-ui/) | The **pipe**: agent → page events | ✅ | ✅ | ✅ | ✅ | _TBD_ |
-| 02 | [A2UI](02-a2ui/) | A UI **format** sent through the pipe | ⬜ | ⬜ | ⬜ | ⬜ | _TBD_ |
+| 02 | [A2UI](02-a2ui/) | A UI **format** sent through the pipe | ✅ | ✅ | ✅ | ✅ | _TBD_ |
 | 03 | [OpenUI](03-openui/) | A compact UI **language** | ⬜ | ⬜ | ⬜ | ⬜ | _TBD_ |
 | 04 | [json-render](04-json-render/) | One spec, several **renderers** | ⬜ | ⬜ | ⬜ | ⬜ | _TBD_ |
 | 05 | [MCP Apps](05-mcp-apps/) | The UI hosted inside **another app** | ⬜ | ⬜ | ⬜ | ⬜ | _TBD_ |

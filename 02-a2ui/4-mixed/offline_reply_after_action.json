@@ -1,0 +1,44 @@
+{
+ "components": [
+  {
+   "id": "main",
+   "component": "Column",
+   "children": [
+    "title",
+    "stats",
+    "note",
+    "days",
+    "pace",
+    "cheaper"
+   ]
+  },
+  {
+   "id": "note",
+   "component": "Text",
+   "variant": "caption",
+   "text": {
+    "path": "/note"
+   }
+  }
+ ],
+ "data": {
+  "title": "3 days in Tokyo",
+  "budget": "Budget ≈ $455",
+  "pace": "Pace: balanced",
+  "days": [
+   {
+    "name": "Day 1 · Old Tokyo",
+    "plan": "Senso-ji · Sumida river · Ueno izakaya"
+   },
+   {
+    "name": "Day 2 · Modern Tokyo",
+    "plan": "Meiji Shrine · Shibuya · Shinjuku views"
+   },
+   {
+    "name": "Day 3 · Food & markets",
+    "plan": "Tsukiji outer market · Akihabara · Ikebukuro ramen"
+   }
+  ],
+  "note": "Swapped the hotel for a capsule hostel and paid sights for free ones."
+ }
+}

@@ -1,0 +1,210 @@
+[
+ {
+  "id": "root",
+  "component": "Card",
+  "child": "main"
+ },
+ {
+  "id": "main",
+  "component": "Column",
+  "children": [
+   "header",
+   "summary",
+   "tabs",
+   "divider",
+   "controls",
+   "replan"
+  ]
+ },
+ {
+  "id": "header",
+  "component": "Row",
+  "align": "center",
+  "children": [
+   "icon",
+   "title"
+  ]
+ },
+ {
+  "id": "icon",
+  "component": "Icon",
+  "name": "locationOn"
+ },
+ {
+  "id": "title",
+  "component": "Text",
+  "variant": "h2",
+  "text": {
+   "path": "/trip/title"
+  }
+ },
+ {
+  "id": "summary",
+  "component": "Text",
+  "text": {
+   "path": "/trip/summary"
+  }
+ },
+ {
+  "id": "tabs",
+  "component": "Tabs",
+  "tabs": [
+   {
+    "title": "Itinerary",
+    "child": "days"
+   },
+   {
+    "title": "Budget",
+    "child": "budget"
+   }
+  ]
+ },
+ {
+  "id": "days",
+  "component": "List",
+  "children": {
+   "componentId": "day",
+   "path": "/trip/days"
+  }
+ },
+ {
+  "id": "day",
+  "component": "Column",
+  "children": [
+   "day_title",
+   "day_acts"
+  ]
+ },
+ {
+  "id": "day_title",
+  "component": "Text",
+  "variant": "h5",
+  "text": {
+   "path": "title"
+  }
+ },
+ {
+  "id": "day_acts",
+  "component": "Text",
+  "variant": "caption",
+  "text": {
+   "path": "activities"
+  }
+ },
+ {
+  "id": "budget",
+  "component": "Column",
+  "children": [
+   "budget_rows",
+   "total"
+  ]
+ },
+ {
+  "id": "budget_rows",
+  "component": "List",
+  "children": {
+   "componentId": "line",
+   "path": "/trip/budget"
+  }
+ },
+ {
+  "id": "line",
+  "component": "Row",
+  "justify": "spaceBetween",
+  "children": [
+   "line_cat",
+   "line_amt"
+  ]
+ },
+ {
+  "id": "line_cat",
+  "component": "Text",
+  "text": {
+   "path": "category"
+  }
+ },
+ {
+  "id": "line_amt",
+  "component": "Text",
+  "text": {
+   "path": "amount"
+  }
+ },
+ {
+  "id": "total",
+  "component": "Text",
+  "variant": "h4",
+  "text": {
+   "path": "/trip/total"
+  }
+ },
+ {
+  "id": "divider",
+  "component": "Divider"
+ },
+ {
+  "id": "controls",
+  "component": "Row",
+  "children": [
+   "days_slider",
+   "style_picker"
+  ]
+ },
+ {
+  "id": "days_slider",
+  "component": "Slider",
+  "label": "Trip length (days)",
+  "min": 1,
+  "max": 7,
+  "value": {
+   "path": "/form/days"
+  }
+ },
+ {
+  "id": "style_picker",
+  "component": "ChoicePicker",
+  "label": "Travel style",
+  "variant": "mutuallyExclusive",
+  "options": [
+   {
+    "label": "Budget",
+    "value": "budget"
+   },
+   {
+    "label": "Comfort",
+    "value": "comfort"
+   },
+   {
+    "label": "Luxury",
+    "value": "luxury"
+   }
+  ],
+  "value": {
+   "path": "/form/style"
+  }
+ },
+ {
+  "id": "replan",
+  "component": "Button",
+  "variant": "primary",
+  "child": "replan_label",
+  "action": {
+   "event": {
+    "name": "replan",
+    "context": {
+     "days": {
+      "path": "/form/days"
+     },
+     "style": {
+      "path": "/form/style"
+     }
+    }
+   }
+  }
+ },
+ {
+  "id": "replan_label",
+  "component": "Text",
+  "text": "Re-plan with these settings"
+ }
+]

@@ -1,0 +1,234 @@
+{
+ "components": [
+  {
+   "id": "root",
+   "component": "Card",
+   "child": "main"
+  },
+  {
+   "id": "main",
+   "component": "Column",
+   "children": [
+    "title",
+    "intro",
+    "stats",
+    "plan_title",
+    "plan",
+    "pack_title",
+    "pack_row",
+    "save"
+   ]
+  },
+  {
+   "id": "title",
+   "component": "Text",
+   "variant": "h2",
+   "text": "Tokyo · 3 days"
+  },
+  {
+   "id": "intro",
+   "component": "Text",
+   "text": {
+    "path": "/summary"
+   }
+  },
+  {
+   "id": "stats",
+   "component": "Row",
+   "children": [
+    "s_budget",
+    "s_pace"
+   ]
+  },
+  {
+   "id": "s_budget",
+   "component": "Column",
+   "children": [
+    "s_budget_l",
+    "s_budget_v"
+   ]
+  },
+  {
+   "id": "s_budget_l",
+   "component": "Text",
+   "variant": "caption",
+   "text": "Estimated budget"
+  },
+  {
+   "id": "s_budget_v",
+   "component": "Text",
+   "variant": "h3",
+   "text": {
+    "path": "/budget"
+   }
+  },
+  {
+   "id": "s_pace",
+   "component": "Column",
+   "children": [
+    "s_pace_l",
+    "s_pace_v"
+   ]
+  },
+  {
+   "id": "s_pace_l",
+   "component": "Text",
+   "variant": "caption",
+   "text": "Pace"
+  },
+  {
+   "id": "s_pace_v",
+   "component": "Text",
+   "variant": "h3",
+   "text": {
+    "path": "/pace"
+   }
+  },
+  {
+   "id": "plan_title",
+   "component": "Text",
+   "variant": "h4",
+   "text": "Day by day"
+  },
+  {
+   "id": "plan",
+   "component": "List",
+   "children": {
+    "componentId": "day",
+    "path": "/days"
+   }
+  },
+  {
+   "id": "day",
+   "component": "Row",
+   "align": "center",
+   "children": [
+    "day_icon",
+    "day_text"
+   ]
+  },
+  {
+   "id": "day_icon",
+   "component": "Icon",
+   "name": "calendarToday"
+  },
+  {
+   "id": "day_text",
+   "component": "Column",
+   "children": [
+    "day_name",
+    "day_plan"
+   ]
+  },
+  {
+   "id": "day_name",
+   "component": "Text",
+   "variant": "h5",
+   "text": {
+    "path": "name"
+   }
+  },
+  {
+   "id": "day_plan",
+   "component": "Text",
+   "variant": "caption",
+   "text": {
+    "path": "plan"
+   }
+  },
+  {
+   "id": "pack_title",
+   "component": "Text",
+   "variant": "h4",
+   "text": "Packing checklist"
+  },
+  {
+   "id": "pack_row",
+   "component": "Row",
+   "children": [
+    "p1",
+    "p2",
+    "p3",
+    "p4"
+   ]
+  },
+  {
+   "id": "p1",
+   "component": "CheckBox",
+   "label": "Suica / Pasmo card",
+   "value": {
+    "path": "/packing/suica"
+   }
+  },
+  {
+   "id": "p2",
+   "component": "CheckBox",
+   "label": "Comfortable shoes",
+   "value": {
+    "path": "/packing/shoes"
+   }
+  },
+  {
+   "id": "p3",
+   "component": "CheckBox",
+   "label": "Pocket wifi",
+   "value": {
+    "path": "/packing/wifi"
+   }
+  },
+  {
+   "id": "p4",
+   "component": "CheckBox",
+   "label": "Cash (yen)",
+   "value": {
+    "path": "/packing/cash"
+   }
+  },
+  {
+   "id": "save",
+   "component": "Button",
+   "variant": "primary",
+   "child": "save_label",
+   "action": {
+    "event": {
+     "name": "save_checklist",
+     "context": {
+      "packing": {
+       "path": "/packing"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "save_label",
+   "component": "Text",
+   "text": "Save checklist"
+  }
+ ],
+ "data": {
+  "summary": "Temples, neon and food markets, using the subway for everything.",
+  "budget": "$735",
+  "pace": "Balanced",
+  "days": [
+   {
+    "name": "Day 1 · Old Tokyo",
+    "plan": "Senso-ji · Sumida river · Ueno izakaya"
+   },
+   {
+    "name": "Day 2 · Modern Tokyo",
+    "plan": "Meiji Shrine · Shibuya · Shinjuku views"
+   },
+   {
+    "name": "Day 3 · Food & markets",
+    "plan": "Tsukiji outer market · Akihabara · Ikebukuro ramen"
+   }
+  ],
+  "packing": {
+   "suica": true,
+   "shoes": true,
+   "wifi": false,
+   "cash": false
+  }
+ }
+}
