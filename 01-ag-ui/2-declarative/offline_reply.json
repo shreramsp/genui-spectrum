@@ -1,0 +1,24 @@
+{
+  "root": "page",
+  "elements": {
+    "page": {"type": "Card", "props": {"title": "3 days in Tokyo"}, "children": ["intro", "stats", "plan", "costs", "more"]},
+    "intro": {"type": "Text", "props": {"text": "A first-timer's mix of old and new Tokyo, using the subway for everything."}},
+    "stats": {"type": "Row", "props": {}, "children": ["m_days", "m_cost", "m_walk"]},
+    "m_days": {"type": "Metric", "props": {"label": "Days", "value": "3"}},
+    "m_cost": {"type": "Metric", "props": {"label": "Est. budget", "value": "$735", "hint": "excluding flights"}},
+    "m_walk": {"type": "Metric", "props": {"label": "Walking / day", "value": "~12 km"}},
+    "plan": {
+      "type": "Table",
+      "props": {
+        "columns": ["Day", "Morning", "Afternoon", "Evening"],
+        "rows": [
+          ["1", "Senso-ji, Asakusa", "Sumida river walk", "Ueno izakaya"],
+          ["2", "Meiji Shrine", "Harajuku & Shibuya", "Shinjuku views"],
+          ["3", "Tsukiji outer market", "Akihabara", "Ramen in Ikebukuro"]
+        ]
+      }
+    },
+    "costs": {"type": "BarChart", "props": {"title": "Budget by category (USD)", "labels": ["Hotel", "Food", "Activities", "Transit"], "values": [420, 180, 90, 45]}},
+    "more": {"type": "Button", "props": {"label": "Suggest cheaper options", "action": "cheaper"}}
+  }
+}

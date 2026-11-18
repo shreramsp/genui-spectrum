@@ -10,3 +10,4 @@ build/
 .next/
 .DS_Store
 *.log
+.pytest_cache/

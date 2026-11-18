@@ -1,0 +1,31 @@
+{
+  "text": "Here's a relaxed 3-day Tokyo plan with a rough budget.",
+  "tool_calls": [
+    {
+      "id": "call_itinerary",
+      "name": "show_itinerary",
+      "arguments": {
+        "city": "Tokyo",
+        "days": [
+          {"day": 1, "title": "Old Tokyo", "activities": ["Senso-ji temple in Asakusa", "Sumida river walk", "Dinner in Ueno"]},
+          {"day": 2, "title": "Modern Tokyo", "activities": ["Shibuya crossing", "Meiji Shrine", "Shinjuku night views"]},
+          {"day": 3, "title": "Food & markets", "activities": ["Tsukiji outer market breakfast", "Akihabara", "Ramen in Ikebukuro"]}
+        ]
+      }
+    },
+    {
+      "id": "call_budget",
+      "name": "show_budget",
+      "arguments": {
+        "city": "Tokyo",
+        "currency": "USD",
+        "items": [
+          {"category": "Hotel", "amount": 420},
+          {"category": "Food", "amount": 180},
+          {"category": "Transit", "amount": 45},
+          {"category": "Activities", "amount": 90}
+        ]
+      }
+    }
+  ]
+}

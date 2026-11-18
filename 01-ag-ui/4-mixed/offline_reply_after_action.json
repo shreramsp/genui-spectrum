@@ -1,0 +1,113 @@
+{
+  "root": "page",
+  "elements": {
+    "page": {
+      "type": "Card",
+      "props": {
+        "title": "3 days in Tokyo"
+      },
+      "children": [
+        "stats",
+        "note",
+        "plan",
+        "pace",
+        "costs",
+        "actions"
+      ]
+    },
+    "stats": {
+      "type": "Row",
+      "props": {},
+      "children": [
+        "m_days",
+        "m_cost"
+      ]
+    },
+    "m_days": {
+      "type": "Metric",
+      "props": {
+        "label": "Days",
+        "value": "3"
+      }
+    },
+    "m_cost": {
+      "type": "Metric",
+      "props": {
+        "label": "Est. budget",
+        "value": "$455",
+        "hint": "hostel + street food"
+      }
+    },
+    "plan": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Day",
+          "Highlights"
+        ],
+        "rows": [
+          [
+            "1",
+            "Senso-ji \u00b7 Sumida river \u00b7 Ueno"
+          ],
+          [
+            "2",
+            "Meiji Shrine \u00b7 Shibuya \u00b7 Shinjuku"
+          ],
+          [
+            "3",
+            "Tsukiji market \u00b7 Akihabara \u00b7 Ikebukuro"
+          ]
+        ]
+      }
+    },
+    "pace": {
+      "type": "HtmlFrame",
+      "props": {
+        "html": "<style>\nbody{font-family:system-ui,sans-serif;margin:0;padding:12px;color:#1b1f24}\n.lbl{display:flex;justify-content:space-between;font-size:13px;color:#667085}\ninput[type=range]{width:100%;accent-color:#c2378c}\n.day{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}\n.slot{flex:1 1 90px;background:#fdf0f7;border-radius:8px;padding:8px;font-size:13px;text-align:center}\nbutton{margin-top:6px;background:#c2378c;color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer}\n</style>\n<b>How packed should each day be?</b>\n<input id=\"pace\" type=\"range\" min=\"1\" max=\"3\" value=\"2\">\n<div class=\"lbl\"><span>Relaxed</span><span>Balanced</span><span>Packed</span></div>\n<div class=\"day\" id=\"preview\"></div>\n<button id=\"apply\">Apply this pace</button>\n<script>\nconst names={1:\"relaxed\",2:\"balanced\",3:\"packed\"};\nconst slots={1:[\"Late breakfast\",\"1 sight\",\"Long dinner\"],2:[\"Breakfast\",\"2 sights\",\"Caf\u00e9 break\",\"Dinner\"],3:[\"Early start\",\"3 sights\",\"Quick lunch\",\"Market\",\"Night views\"]};\nfunction draw(){preview.innerHTML=slots[pace.value].map(s=>`<div class=\"slot\">${s}</div>`).join(\"\");}\npace.oninput=draw; draw();\napply.onclick=()=>sendAction(\"set_pace\",{pace:names[pace.value]});\n</script>",
+        "height": 230,
+        "actions": [
+          "set_pace"
+        ]
+      }
+    },
+    "costs": {
+      "type": "BarChart",
+      "props": {
+        "title": "Budget by category (USD)",
+        "labels": [
+          "Hotel",
+          "Food",
+          "Activities",
+          "Transit"
+        ],
+        "values": [
+          210,
+          120,
+          80,
+          45
+        ]
+      }
+    },
+    "actions": {
+      "type": "Row",
+      "props": {},
+      "children": [
+        "b_cheaper"
+      ]
+    },
+    "b_cheaper": {
+      "type": "Button",
+      "props": {
+        "label": "Make it cheaper",
+        "action": "cheaper"
+      }
+    },
+    "note": {
+      "type": "Text",
+      "props": {
+        "text": "Swapped the hotel for a capsule hostel and paid sights for free ones (shrines, parks, observatory)."
+      }
+    }
+  }
+}
