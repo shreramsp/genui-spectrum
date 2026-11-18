@@ -1,0 +1,88 @@
+{
+ "root": "card",
+ "elements": {
+  "card": {
+   "type": "Card",
+   "props": {
+    "title": {
+     "$state": "/trip/title"
+    },
+    "subtitle": {
+     "$state": "/trip/summary"
+    }
+   },
+   "children": [
+    "stats",
+    "days",
+    "costs"
+   ]
+  },
+  "stats": {
+   "type": "Row",
+   "props": {},
+   "children": [
+    "m-days",
+    "m-total"
+   ]
+  },
+  "m-days": {
+   "type": "Metric",
+   "props": {
+    "label": "Days",
+    "value": {
+     "$state": "/trip/dayCount"
+    },
+    "hint": null
+   },
+   "children": []
+  },
+  "m-total": {
+   "type": "Metric",
+   "props": {
+    "label": "Estimated budget",
+    "value": {
+     "$state": "/trip/total"
+    },
+    "hint": "excluding flights"
+   },
+   "children": []
+  },
+  "days": {
+   "type": "Card",
+   "props": {
+    "title": "Day by day",
+    "subtitle": null
+   },
+   "repeat": {
+    "statePath": "/trip/days",
+    "key": "day"
+   },
+   "children": [
+    "day-text"
+   ]
+  },
+  "day-text": {
+   "type": "Text",
+   "props": {
+    "text": {
+     "$item": "plan"
+    },
+    "tone": "normal"
+   },
+   "children": []
+  },
+  "costs": {
+   "type": "BarChart",
+   "props": {
+    "title": "Budget by category (USD)",
+    "labels": {
+     "$state": "/trip/labels"
+    },
+    "values": {
+     "$state": "/trip/values"
+    }
+   },
+   "children": []
+  }
+ }
+}

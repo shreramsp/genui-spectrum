@@ -1,0 +1,27 @@
+{
+ "title": "3 days in Tokyo",
+ "summary": "A first-timer's mix of old and new Tokyo, all by subway.",
+ "days": [
+  "Day 1 · Senso-ji · Sumida river walk · Ueno izakaya",
+  "Day 2 · Meiji Shrine · Shibuya crossing · Shinjuku views",
+  "Day 3 · Tsukiji outer market · Akihabara · Ikebukuro ramen"
+ ],
+ "budget": [
+  {
+   "category": "Hotel",
+   "amount": 420
+  },
+  {
+   "category": "Food",
+   "amount": 180
+  },
+  {
+   "category": "Activities",
+   "amount": 90
+  },
+  {
+   "category": "Transit",
+   "amount": 45
+  }
+ ]
+}

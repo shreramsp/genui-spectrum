@@ -1,0 +1,51 @@
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 16px; color: #1b1f24; }
+  h2 { margin: 0 0 12px; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+  .tabs button { border: 1px solid #d0d5dd; background: #fff; padding: 6px 12px; border-radius: 99px; cursor: pointer; }
+  .tabs button.on { background: #e8590c; color: #fff; border-color: #e8590c; }
+  .timeline { border-left: 3px solid #e8590c; margin-left: 8px; padding-left: 16px; }
+  .stop { margin-bottom: 12px; }
+  .stop b { display: block; }
+  .stop span { color: #667085; font-size: 13px; }
+  .stop input { margin-right: 6px; }
+  .done b { text-decoration: line-through; color: #98a2b3; }
+  .progress { height: 8px; background: #f2f4f7; border-radius: 4px; margin: 8px 0 16px; }
+  .progress div { height: 100%; background: #e8590c; border-radius: 4px; width: 0; transition: width .3s; }
+</style>
+<h2>🗼 Tokyo in 3 days</h2>
+<div class="tabs" id="tabs"></div>
+<div class="progress"><div id="bar"></div></div>
+<div class="timeline" id="timeline"></div>
+<script>
+  const days = {
+    "Day 1 · Old Tokyo": [["8:00", "Senso-ji temple", "Arrive early to beat the crowds"], ["12:00", "Asakusa street food", "Try melon pan"], ["16:00", "Sumida river walk", "Views of the Skytree"], ["19:00", "Ueno izakaya", "~$30 per person"]],
+    "Day 2 · Modern Tokyo": [["9:00", "Meiji Shrine", "Forest walk in the city"], ["12:00", "Harajuku", "Takeshita Street"], ["15:00", "Shibuya crossing", "Best seen from above"], ["20:00", "Shinjuku night views", "Free observatory"]],
+    "Day 3 · Food & markets": [["7:30", "Tsukiji outer market", "Sushi breakfast"], ["11:00", "Akihabara", "Electronics & anime"], ["18:00", "Ikebukuro ramen", "Expect a short queue"]]
+  };
+  const done = new Set();
+  let current = Object.keys(days)[0];
+  function draw() {
+    tabs.innerHTML = "";
+    Object.keys(days).forEach(name => {
+      const b = document.createElement("button");
+      b.textContent = name.split(" · ")[0];
+      b.className = name === current ? "on" : "";
+      b.onclick = () => { current = name; draw(); };
+      tabs.appendChild(b);
+    });
+    timeline.innerHTML = "";
+    days[current].forEach(([time, place, note]) => {
+      const key = current + place;
+      const div = document.createElement("label");
+      div.className = "stop" + (done.has(key) ? " done" : "");
+      div.style.display = "block";
+      div.innerHTML = `<input type="checkbox" ${done.has(key) ? "checked" : ""}><b>${time} · ${place}</b><span>${note}</span>`;
+      div.querySelector("input").onchange = e => { e.target.checked ? done.add(key) : done.delete(key); draw(); };
+      timeline.appendChild(div);
+    });
+    const total = Object.values(days).flat().length;
+    bar.style.width = (done.size / total * 100) + "%";
+  }
+  draw();
+</script>

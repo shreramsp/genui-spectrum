@@ -1,0 +1,5 @@
+{"op": "replace", "path": "/elements/metric-2/props/value", "value": "$455"}
+{"op": "replace", "path": "/elements/metric-2/props/hint", "value": "hostel + street food"}
+{"op": "replace", "path": "/elements/chart-1/props/values", "value": [210, 120, 80, 45]}
+{"op": "add", "path": "/elements/text-1", "value": {"type": "Text", "props": {"text": "Swapped the hotel for a capsule hostel and paid sights for free ones.", "tone": "muted"}, "children": []}}
+{"op": "replace", "path": "/elements/card-1/children", "value": ["row-1", "text-1", "table-1", "frame-1", "chart-1", "button-1"]}
