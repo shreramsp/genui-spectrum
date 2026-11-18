@@ -22,6 +22,7 @@ import json
 import math
 import os
 import re
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -155,7 +156,10 @@ def stream(messages, fake=None):
     """Send one request and yield the reply text piece by piece as it arrives."""
     if OFFLINE:
         text = fake or ""
+        delay = float(os.environ.get("OFFLINE_STREAM_DELAY", "0"))  # e.g. 0.05 to watch it stream
         for i in range(0, len(text), 60):  # pretend to stream the canned reply
+            if delay:
+                time.sleep(delay)
             yield text[i : i + 60]
         return
 

@@ -116,6 +116,7 @@ export function createShell({ part, mode, title, blurb, examples = [], onSubmit 
 function hint(e) {
   if (e.delta && typeof e.delta === "string") return JSON.stringify(e.delta.slice(0, 40));
   if (e.toolCallName) return e.toolCallName;
+  if (e.name === "openui" && e.value) return "openui · " + (e.value.delta ? JSON.stringify(e.value.delta.slice(0, 30)) : Object.keys(e.value)[0]);
   if (e.name === "a2ui" && e.value) return "a2ui · " + Object.keys(e.value).find((k) => k !== "version");
   if (e.name) return e.name;
   if (e.type === "STATE_DELTA") return `${e.delta.length} op(s)`;

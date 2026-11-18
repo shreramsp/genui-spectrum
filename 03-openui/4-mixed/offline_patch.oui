@@ -1,0 +1,4 @@
+root = Stack([title, stats, note, plan, pace, costs, cheaper])
+m_budget = Metric("Est. budget", "$455", "hostel + street food")
+note = Text("Swapped the hotel for a capsule hostel and paid sights for free ones.", "small")
+costs = BarChart("Budget by category (USD)", ["Hostel", "Food", "Activities", "Transit"], [210, 120, 80, 45])

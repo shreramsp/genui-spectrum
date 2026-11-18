@@ -1,0 +1,24 @@
+{
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_trip",
+      "name": "show_trip",
+      "arguments": {
+        "title": "3 days in Tokyo",
+        "days": [
+          {"title": "Old Tokyo", "plan": "Senso-ji · Sumida river walk · Ueno izakaya"},
+          {"title": "Modern Tokyo", "plan": "Meiji Shrine · Shibuya crossing · Shinjuku night views"},
+          {"title": "Food & markets", "plan": "Tsukiji outer market · Akihabara · Ikebukuro ramen"}
+        ],
+        "budget": [
+          {"category": "Hotel", "amount": 420},
+          {"category": "Food", "amount": 180},
+          {"category": "Activities", "amount": 90},
+          {"category": "Transit", "amount": 45}
+        ],
+        "tip": "Tip: a Suica card works on every subway line and in convenience stores."
+      }
+    }
+  ]
+}
