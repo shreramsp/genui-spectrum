@@ -1,0 +1,5 @@
+type,name,date,price_usd,status
+Flight,SFO-HND JAL 001,2026-04-02,780,confirmed
+Hotel,Asakusa Riverside (3 nights),2026-04-03,420,confirmed
+Activity,teamLab Planets,2026-04-05,25,confirmed
+Activity,Day trip to Nikko,2026-04-06,95,not booked

@@ -149,7 +149,10 @@ def chat(messages, tools=None, json_mode=False, fake=None):
         {"id": c.id or f"call_{i}", "name": c.function.name, "arguments": json.loads(c.function.arguments or "{}")}
         for i, c in enumerate(reply.tool_calls or [])
     ]
-    return {"text": reply.content or "", "tool_calls": calls}
+    # The model's own assistant message, untouched. Agent loops send it back as history: Gemini 3
+    # attaches "thought signatures" to tool calls (extra fields) and expects them back next turn.
+    raw = reply.model_dump(exclude_none=True)
+    return {"text": reply.content or "", "tool_calls": calls, "assistant_message": raw}
 
 
 def stream(messages, fake=None):

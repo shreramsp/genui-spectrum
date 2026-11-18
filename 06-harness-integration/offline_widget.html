@@ -1,0 +1,34 @@
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 14px; color: #1b1f24; }
+  h2 { margin: 0 0 6px; }
+  .line { display: grid; grid-template-columns: 90px 1fr 60px; gap: 8px; align-items: center; margin: 6px 0; font-size: 14px; }
+  .track { background: #eef3fd; border-radius: 4px; height: 14px; }
+  .bar { background: #2f6fde; height: 100%; border-radius: 4px; }
+  .total { font-size: 26px; font-weight: 700; margin: 10px 0; }
+  input { width: 100%; accent-color: #2f6fde; }
+  .muted { color: #667085; font-size: 13px; }
+</style>
+<h2>What if I cut my spending?</h2>
+<div class="muted">Data from expenses.csv · drag to cut the flexible categories</div>
+<input id="cut" type="range" min="0" max="60" value="0">
+<div class="muted">Cut Food, Shopping and Activities by <b id="pct">0</b>%</div>
+<div class="total" id="total"></div>
+<div id="lines"></div>
+<script>
+const data = { Flights: 780, Hotel: 420, Food: 85, Shopping: 60, Transit: 45, Activities: 43 };
+const flex = ["Food", "Shopping", "Activities"];
+function draw() {
+  const c = Number(cut.value) / 100;
+  pct.textContent = cut.value;
+  let sum = 0;
+  lines.innerHTML = "";
+  for (const [k, v] of Object.entries(data)) {
+    const n = flex.includes(k) ? v * (1 - c) : v;
+    sum += n;
+    lines.innerHTML += `<div class="line"><span>${k}</span><div class="track"><div class="bar" style="width:${(n / 780) * 100}%"></div></div><span>$${Math.round(n)}</span></div>`;
+  }
+  total.textContent = `$${Math.round(sum).toLocaleString()} total`;
+}
+cut.oninput = draw;
+draw();
+</script>

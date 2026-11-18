@@ -1,0 +1,36 @@
+[
+ {
+  "text": "",
+  "tool_calls": [
+   {
+    "id": "call_1",
+    "name": "list_files",
+    "arguments": {}
+   }
+  ]
+ },
+ {
+  "text": "",
+  "tool_calls": [
+   {
+    "id": "call_2",
+    "name": "read_file",
+    "arguments": {
+     "path": "expenses.csv"
+    }
+   }
+  ]
+ },
+ {
+  "text": "",
+  "tool_calls": [
+   {
+    "id": "call_3",
+    "name": "render_html",
+    "arguments": {
+     "html": "<style>\n  body { font-family: system-ui, sans-serif; margin: 0; padding: 14px; color: #1b1f24; }\n  h2 { margin: 0 0 6px; }\n  .line { display: grid; grid-template-columns: 90px 1fr 60px; gap: 8px; align-items: center; margin: 6px 0; font-size: 14px; }\n  .track { background: #eef3fd; border-radius: 4px; height: 14px; }\n  .bar { background: #2f6fde; height: 100%; border-radius: 4px; }\n  .total { font-size: 26px; font-weight: 700; margin: 10px 0; }\n  input { width: 100%; accent-color: #2f6fde; }\n  .muted { color: #667085; font-size: 13px; }\n</style>\n<h2>What if I cut my spending?</h2>\n<div class=\"muted\">Data from expenses.csv · drag to cut the flexible categories</div>\n<input id=\"cut\" type=\"range\" min=\"0\" max=\"60\" value=\"0\">\n<div class=\"muted\">Cut Food, Shopping and Activities by <b id=\"pct\">0</b>%</div>\n<div class=\"total\" id=\"total\"></div>\n<div id=\"lines\"></div>\n<script>\nconst data = { Flights: 780, Hotel: 420, Food: 85, Shopping: 60, Transit: 45, Activities: 43 };\nconst flex = [\"Food\", \"Shopping\", \"Activities\"];\nfunction draw() {\n  const c = Number(cut.value) / 100;\n  pct.textContent = cut.value;\n  let sum = 0;\n  lines.innerHTML = \"\";\n  for (const [k, v] of Object.entries(data)) {\n    const n = flex.includes(k) ? v * (1 - c) : v;\n    sum += n;\n    lines.innerHTML += `<div class=\"line\"><span>${k}</span><div class=\"track\"><div class=\"bar\" style=\"width:${(n / 780) * 100}%\"></div></div><span>$${Math.round(n)}</span></div>`;\n  }\n  total.textContent = `$${Math.round(sum).toLocaleString()} total`;\n}\ncut.oninput = draw;\ndraw();\n</script>\n"
+    }
+   }
+  ]
+ }
+]

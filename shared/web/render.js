@@ -62,7 +62,7 @@ export const REGISTRY = {
   HtmlFrame: (p, ctx) => {
     const el = h("div", "c-htmlframe");
     el.appendChild(h("div", "c-htmlframe-tag", "AI-generated region · sandboxed"));
-    mountSandbox(el, p.html, { height: p.height || 360, allowedActions: p.actions || [], onAction: ctx.onAction });
+    mountSandbox(el, p.html, { height: Math.max(p.height || 360, 260), allowedActions: p.actions || [], onAction: ctx.onAction });
     return el;
   },
 };

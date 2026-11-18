@@ -72,6 +72,7 @@ body {
 .ev-tool .ev-type { color: #c26a00; }
 .ev-state .ev-type { color: var(--accent); }
 .ev-custom .ev-type { color: #c2378c; }
+.ev-step .ev-type { color: var(--ink); text-decoration: underline; }
 
 /* ---- catalog components ---- */
 .c-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }

@@ -1,0 +1,62 @@
+[
+ {
+  "text": "",
+  "tool_calls": [
+   {
+    "id": "call_1",
+    "name": "list_files",
+    "arguments": {}
+   }
+  ]
+ },
+ {
+  "text": "",
+  "tool_calls": [
+   {
+    "id": "call_2",
+    "name": "read_file",
+    "arguments": {
+     "path": "expenses.csv"
+    }
+   }
+  ]
+ },
+ {
+  "text": "",
+  "tool_calls": [
+   {
+    "id": "call_3",
+    "name": "show_budget",
+    "arguments": {
+     "title": "Tokyo trip spending",
+     "items": [
+      {
+       "category": "Flights",
+       "amount": 780
+      },
+      {
+       "category": "Hotel",
+       "amount": 420
+      },
+      {
+       "category": "Food",
+       "amount": 85
+      },
+      {
+       "category": "Shopping",
+       "amount": 60
+      },
+      {
+       "category": "Transit",
+       "amount": 45
+      },
+      {
+       "category": "Activities",
+       "amount": 43
+      }
+     ]
+    }
+   }
+  ]
+ }
+]

@@ -1,0 +1,43 @@
+[
+ {
+  "text": "",
+  "tool_calls": [
+   {
+    "id": "call_1",
+    "name": "list_files",
+    "arguments": {}
+   }
+  ]
+ },
+ {
+  "text": "",
+  "tool_calls": [
+   {
+    "id": "call_2",
+    "name": "read_file",
+    "arguments": {
+     "path": "expenses.csv"
+    }
+   },
+   {
+    "id": "call_3",
+    "name": "read_file",
+    "arguments": {
+     "path": "bookings.csv"
+    }
+   }
+  ]
+ },
+ {
+  "text": "",
+  "tool_calls": [
+   {
+    "id": "call_4",
+    "name": "render_ui",
+    "arguments": {
+     "spec_json": "{\"root\": \"page\", \"elements\": {\"page\": {\"type\": \"Card\", \"props\": {\"title\": \"Tokyo trip: spending so far\"}, \"children\": [\"stats\", \"chart\", \"bookings\"]}, \"stats\": {\"type\": \"Row\", \"props\": {}, \"children\": [\"m_total\", \"m_top\", \"m_open\"]}, \"m_total\": {\"type\": \"Metric\", \"props\": {\"label\": \"Spent\", \"value\": \"$1,433\", \"hint\": \"12 expenses\"}}, \"m_top\": {\"type\": \"Metric\", \"props\": {\"label\": \"Biggest item\", \"value\": \"Flights\", \"hint\": \"$780\"}}, \"m_open\": {\"type\": \"Metric\", \"props\": {\"label\": \"Not booked yet\", \"value\": \"Nikko day trip\", \"hint\": \"$95\"}}, \"chart\": {\"type\": \"BarChart\", \"props\": {\"title\": \"By category (USD)\", \"labels\": [\"Flights\", \"Hotel\", \"Food\", \"Shopping\", \"Transit\", \"Activities\"], \"values\": [780, 420, 85, 60, 45, 43]}}, \"bookings\": {\"type\": \"Table\", \"props\": {\"columns\": [\"Type\", \"Name\", \"Date\", \"Price\", \"Status\"], \"rows\": [[\"Flight\", \"SFO-HND JAL 001\", \"2026-04-02\", \"$780\", \"confirmed\"], [\"Hotel\", \"Asakusa Riverside (3 nights)\", \"2026-04-03\", \"$420\", \"confirmed\"], [\"Activity\", \"teamLab Planets\", \"2026-04-05\", \"$25\", \"confirmed\"], [\"Activity\", \"Day trip to Nikko\", \"2026-04-06\", \"$95\", \"not booked\"]]}}}}"
+    }
+   }
+  ]
+ }
+]
