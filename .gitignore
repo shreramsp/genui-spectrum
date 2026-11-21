@@ -6,6 +6,9 @@ __pycache__/
 .env.*
 !.env.example
 dist/
+# ...except the prebuilt browser bundles, so Parts 03-04 run without npm
+!03-openui/web/dist/
+!04-json-render/web/dist/
 build/
 .next/
 .DS_Store
