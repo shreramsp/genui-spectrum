@@ -84,14 +84,14 @@ pytest 05-mcp-apps                       # 7 offline tests (each host starts the
 
 ### In a real MCP host (Claude Desktop, Goose, …)
 
-`trip_server.py` is a normal stdio MCP server, so any MCP host can launch it. In Claude Desktop, add this to `claude_desktop_config.json` (Settings → Developer → Edit Config), using your own path:
+`trip_server.py` is a normal stdio MCP server, so any MCP host can launch it. In Claude Desktop, add this to `claude_desktop_config.json` (Settings → Developer → Edit Config), replacing `/path/to/genui-spectrum` with where you cloned the repo:
 
 ```json
 {
   "mcpServers": {
     "genui-trip": {
-      "command": "/Users/shreram/Desktop/Projects/assignment 4 special topics/.venv/bin/python",
-      "args": ["/Users/shreram/Desktop/Projects/assignment 4 special topics/05-mcp-apps/trip_server.py"]
+      "command": "/path/to/genui-spectrum/.venv/bin/python",
+      "args": ["/path/to/genui-spectrum/05-mcp-apps/trip_server.py"]
     }
   }
 }
